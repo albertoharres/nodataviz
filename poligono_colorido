@@ -1,0 +1,194 @@
+// Polígono Colorido
+//
+//Código criado por Alberto Salgado Harres, Rio de Janeiro, Brasil.
+//
+//última versão 17/10/2013.
+
+
+float x, acc, X, Y, C, C2, f, v, v2, v3;
+
+void setup() 
+{
+  size(1200, 800, P3D);
+  x=1;
+  acc=1;
+  background(0);
+  X = width/255;
+  Y = height/255;
+  C=0;
+  v=0;
+  v2=7;
+  v3=2;
+}
+
+void draw() 
+{
+  //variaveis:
+  v+=0.001;
+  if (v>7) {
+    v=0;
+  }
+    v2-=0.001;
+  if (v2<-6) {
+    v2=0;
+  }
+    v3+=0.003;
+  if (v3>7) {
+    v3=0;
+  }
+  f+=0.2;
+  x+= 0.1;
+  C+=1;
+  if(C>255) {
+    C=random(100)-50;
+  }
+  C2 +=1.1;
+  if(C2>255) {
+    C2=random(150)-75;
+  }
+  
+  //fundo.
+  ambientLight(mouseX/X, C, 255);
+  camera(mouseX, height/2, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
+
+  //cores.
+  stroke(C, mouseY/Y, mouseX/X- C2, (C+C2)/2);
+  fill((C+C2)/2-mouseX/X-mouseY/Y, C2, mouseY/Y-C, C2);
+  
+  //movimento, rotação e escala.
+  translate(width - mouseX, height - mouseY, mouseX/8-mouseY/2);
+  rotateX(x/2 * (mouseX/width+1));
+  rotateY(x/3 * (mouseY/height+1));
+  rotateZ(x/3);
+  scale(mouseX/4.5);
+  
+  //objeto.
+  beginShape();
+  vertex( 2, -1, -4, 3, 1);
+  vertex( -1, -5, -1, -2, 2);
+  vertex( 0, 1, 1, 3, -5);
+
+  vertex( 3, -1, -2, 2, -3);
+  vertex( 1, 0, -1, 3);
+  vertex( -1, 3, 3, 1, 3);
+
+  vertex( 5, 1, -3, 0);
+  vertex(-1, 1, -4, -3, -3);
+  vertex( 0, 0, 1);
+
+  vertex( 2, 2, -1);
+  vertex(-1, -3, -4);
+  vertex( 1, 0, 2);
+
+  vertex( -4, 4, -1);
+  vertex( 2, -1, -1);
+  vertex( 0, 0, 1);
+  
+  vertex(-2, -6, -1);
+  vertex( 3,  -2, -4);
+  vertex( -1, 3, 1);
+  
+  vertex( 2, -1, -1);
+  vertex( 3, 1, -7);
+  vertex( -5, 3, 3);
+
+  vertex( 1, -2, -4);
+  vertex(-2, 3, -3);
+  vertex( 0, 3, 4);
+
+  vertex(-3, 6, -1);
+  vertex(-1, -1, -3);
+  vertex( 2, 1, -3);
+
+  vertex(-3, 2, -1);
+  vertex(1, 2, -1);
+  vertex( 2, 0, 4);
+  
+  vertex(-5, -1, 2);
+  vertex( -3, -2, 0);
+  vertex( 0, 1, 1);
+  
+  vertex(-3, 1, -3);
+  vertex( 2, -1, 0);
+  vertex( 0, 0, 1);
+  
+  vertex(-1, -3, -1);
+  vertex( -5,  5, -4);
+  vertex( 7, 1, -2);
+  
+  vertex( 1, -1, -3);
+  vertex( -3, 1, -1, 2);
+  vertex( -3, 1, 0);
+  
+  vertex( 3, 1, -1);
+  vertex(-1, 1, -2);
+  vertex( 0, 2, 5);
+  
+  vertex(-7, 0, -1);
+  vertex( 3,  -2, -4);
+  vertex( -1, 3, 1);
+  
+  vertex( 2, -4, -2);
+  vertex( 2, 1, -4);
+  vertex( -5, 3, 1);
+
+  vertex( 0, -2, -4);
+  vertex(-2, 3, -3);
+  vertex( 0, 7, 4);
+
+  vertex( 2, 0, -1);
+  vertex(-1, -3, -4);
+  vertex( 2, 3, 7);
+
+  vertex( -5, -2, -2);
+  vertex( 1, 0, -1);
+  vertex( -1, 3, 3);
+
+  vertex( 3, 1, -1);
+  vertex(-1, 4, -1);
+  vertex( 4, 0, 1);
+
+  vertex( 3, 1, -1);
+  vertex(-1, -2, -4);
+  vertex( 0, 0, 1);
+
+  vertex( 4, 2, -1);
+  vertex( 2, -1, -1);
+  vertex( 0, 0, 1);
+  
+  vertex(-2, -1, -3);
+  vertex( 7,  -2, -4);
+  vertex( -1, 3, 1);
+  
+  vertex( 2, -1, -1);
+  vertex( 3, 1, -2);
+  vertex( 5, 3, 1);
+
+  vertex( 1, -2, -4);
+  vertex(-2, 3, -3);
+  vertex( 0, 3, 4);
+
+  vertex(-1, 3, 2);
+  vertex( 2, -1, -1);
+  vertex( 0, 0, 0);
+  
+  vertex(-1, 0, -2);
+  vertex( -1,  3, -5);
+  vertex( -1, 3, 3);
+  
+  vertex( 0, -1, -1);
+  vertex( -1, 3, 3);
+  vertex( 5, 0, 5);
+  endShape();
+ 
+pushMatrix();
+  stroke(C2, mouseY/Y, mouseX/X- C, 255-(C+C2)/2);
+noFill();
+sphere(mouseX/30);
+popMatrix();
+}
+
+
+void mouseClicked() {
+save("objeto2.jpg");
+}
